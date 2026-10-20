@@ -1,0 +1,130 @@
+﻿<Page x:Class="ofirManaFamily.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="HomePage">
+
+    <!-- 1.  שימוש באותן הגדרות עיצוב קיימות + השהיית ToolTip כללית -->
+    <Page.Resources>
+        <!-- כרטיס מעוצב -->
+        <Style x:Key="CardButtonStyle" TargetType="Button">
+            <Setter Property="Background"      Value="White"/>
+            <Setter Property="Foreground"      Value="#333"/>
+            <Setter Property="Padding"         Value="16"/>
+            <Setter Property="Margin"          Value="8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="12">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="10" ShadowDepth="2"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFF0F0F0"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFE0E0E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- הגדרות ברירת-מחדל ל-ToolTip בכל העמוד -->
+        <Style TargetType="ToolTip">
+            <Setter Property="FontSize"   Value="14"/>
+
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+        </Style>
+    </Page.Resources>
+
+    <!-- 2.  תוכן העמוד -->
+    <Grid ToolTipService.InitialShowDelay="400"
+          ToolTipService.ShowDuration="10000">
+
+        <!-- תמונת רקע -->
+        <Grid.Background>
+            <ImageBrush ImageSource="assets/homepage.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Border Background="#CCFFFFFF" CornerRadius="20" Padding="24" Margin="40"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+
+                <!-- ‎‎‎‎כותרת + יציאה -->
+                <DockPanel Margin="0,0,0,20">
+                    <StackPanel DockPanel.Dock="Left">
+                        <TextBlock x:Name="familyNameText" FontWeight="Bold" FontSize="16" Foreground="#5D4C9A"/>
+                        <TextBlock x:Name="familyIdText"   FontSize="14" Foreground="Gray"/>
+                    </StackPanel>
+
+                    <Button Content="התנתק"
+                            Click="Logout_Click"
+                            Background="#5D4C9A"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Width="80" Height="30"
+                            HorizontalAlignment="Right"
+                            DockPanel.Dock="Right"/>
+                </DockPanel>
+
+                <TextBlock x:Name="greetingText" FontSize="28" FontWeight="Bold"
+                           Foreground="#5D4C9A" Margin="0,0,0,10"/>
+
+                <TextBlock Text="?מה תרצו לעשות היום" FontSize="18"
+                           Foreground="#5D4C9A" Margin="0,0,0,20"
+                           HorizontalAlignment="Center"/>
+
+                <!-- 3.  כפתורי פעולה -->
+                <UniformGrid Rows="2" Columns="2">
+
+                    <!-- סקרים -->
+                    <Button Style="{StaticResource CardButtonStyle}"
+                            Click="Polls_Click"
+                            ToolTip="זה המקום ליצור סקרים משפחתיים ולהצביע עליהם">
+                        <StackPanel>
+                            <Image Source="assets/polls.png" Width="48" Height="48" Margin="0,0,0,10"/>
+                            <TextBlock Text="סקרים" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- משימות -->
+                    <Button Style="{StaticResource CardButtonStyle}"
+                            Click="Tasks_Click"
+                            ToolTip="זה המקום בו תוכלו להוסיף מטלות משפתחתיות ולעקוב אחריהן">
+                        <StackPanel>
+                            <Image Source="assets/tasks.png" Width="48" Height="48" Margin="0,0,0,10"/>
+                            <TextBlock Text="משימות" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- קניות -->
+                    <Button Style="{StaticResource CardButtonStyle}"
+                            Click="Shopping_Click"
+                            ToolTip="נהלו רשימות קניות משותפות ותעדכנו בזמן אמת מה כבר נקנה">
+                        <StackPanel>
+                            <Image Source="assets/shopping.png" Width="48" Height="48" Margin="0,0,0,10"/>
+                            <TextBlock Text="קניות" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- אירועים -->
+                    <Button Style="{StaticResource CardButtonStyle}"
+                            Click="Events_Click"
+                            ToolTip="תיאום אירועים בלוח שנה שמסונכרן עם כל בני המשפחה">
+                        <StackPanel>
+                            <Image Source="assets/events.png" Width="48" Height="48"/>
+                            <TextBlock Text="אירועים" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+
+                </UniformGrid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

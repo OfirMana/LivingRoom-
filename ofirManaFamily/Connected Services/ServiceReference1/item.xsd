@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="MemberList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Members" nillable="true" type="tns:Members" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MemberList" nillable="true" type="tns:MemberList" />
+  <xs:complexType name="Members">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:User">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BirthDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Family" nillable="true" type="tns:Families" />
+          <xs:element minOccurs="0" name="IsManager" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MemberName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Role" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Members" nillable="true" type="tns:Members" />
+  <xs:complexType name="User">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Passwordd" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="BaseEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseEntity" nillable="true" type="tns:BaseEntity" />
+  <xs:complexType name="Cities">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Cities" nillable="true" type="tns:Cities" />
+  <xs:complexType name="Events">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EventDescription" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EventEndDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EventStartDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ForMembers" nillable="true" type="tns:MemberList" />
+          <xs:element minOccurs="0" name="GoogleEventId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TasksLinked" nillable="true" type="tns:TasksList" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Events" nillable="true" type="tns:Events" />
+  <xs:complexType name="TasksList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tasks" nillable="true" type="tns:Tasks" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TasksList" nillable="true" type="tns:TasksList" />
+  <xs:complexType name="Tasks">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Done" type="xs:boolean" />
+          <xs:element minOccurs="0" name="FamilyID" type="xs:int" />
+          <xs:element minOccurs="0" name="TaskDeadline" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="TaskInstructions" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Tasks" nillable="true" type="tns:Tasks" />
+  <xs:complexType name="Families">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CityID" nillable="true" type="tns:Cities" />
+          <xs:element minOccurs="0" name="EventsList" nillable="true" type="tns:EventsList" />
+          <xs:element minOccurs="0" name="FamPass" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FamilyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GoogleCalendarId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MemberList" nillable="true" type="tns:MemberList" />
+          <xs:element minOccurs="0" name="PollsList" nillable="true" type="tns:PollsList" />
+          <xs:element minOccurs="0" name="RoutineList" nillable="true" type="tns:RoutineList" />
+          <xs:element minOccurs="0" name="ShoppingList" nillable="true" type="tns:ShoppingList" />
+          <xs:element minOccurs="0" name="TasksList" nillable="true" type="tns:TasksList" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Families" nillable="true" type="tns:Families" />
+  <xs:complexType name="EventsList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Events" nillable="true" type="tns:Events" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EventsList" nillable="true" type="tns:EventsList" />
+  <xs:complexType name="PollsList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Polls" nillable="true" type="tns:Polls" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PollsList" nillable="true" type="tns:PollsList" />
+  <xs:complexType name="Polls">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FamilyID" nillable="true" type="tns:Families" />
+          <xs:element minOccurs="0" name="Question" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Results" type="xs:int" />
+          <xs:element minOccurs="0" name="Voted" nillable="true" type="tns:MemberList" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Polls" nillable="true" type="tns:Polls" />
+  <xs:complexType name="PollOptions">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OptionNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="OptionText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PollID" type="xs:int" />
+          <xs:element minOccurs="0" name="Votes" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PollOptions" nillable="true" type="tns:PollOptions" />
+  <xs:complexType name="PollVotes">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MemberID" type="xs:int" />
+          <xs:element minOccurs="0" name="OptionID" type="xs:int" />
+          <xs:element minOccurs="0" name="PollID" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PollVotes" nillable="true" type="tns:PollVotes" />
+  <xs:complexType name="Routine">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DaysOfWeek" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FamilyID" nillable="true" type="tns:Families" />
+          <xs:element minOccurs="0" name="Hour" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RepeatType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoutineName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Routine" nillable="true" type="tns:Routine" />
+  <xs:complexType name="Shopping">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddedByMember" type="xs:int" />
+          <xs:element minOccurs="0" name="FamilyID" nillable="true" type="tns:Families" />
+          <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Purchased" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Shopping" nillable="true" type="tns:Shopping" />
+  <xs:complexType name="Admin">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:User">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Admin" nillable="true" type="tns:Admin" />
+  <xs:complexType name="RoutineList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Routine" nillable="true" type="tns:Routine" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoutineList" nillable="true" type="tns:RoutineList" />
+  <xs:complexType name="ShoppingList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Shopping" nillable="true" type="tns:Shopping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShoppingList" nillable="true" type="tns:ShoppingList" />
+  <xs:complexType name="FamiliesList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Families" nillable="true" type="tns:Families" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FamiliesList" nillable="true" type="tns:FamiliesList" />
+  <xs:complexType name="CitiesList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Cities" nillable="true" type="tns:Cities" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CitiesList" nillable="true" type="tns:CitiesList" />
+  <xs:complexType name="PollOptionsList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PollOptions" nillable="true" type="tns:PollOptions" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PollOptionsList" nillable="true" type="tns:PollOptionsList" />
+  <xs:complexType name="PollVotesList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PollVotes" nillable="true" type="tns:PollVotes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PollVotesList" nillable="true" type="tns:PollVotesList" />
+</xs:schema>

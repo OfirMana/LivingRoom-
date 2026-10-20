@@ -1,0 +1,17 @@
+name: Windows build
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
+      - uses: NuGet/setup-nuget@v2
+      - name: Restore pinned packages
+        run: nuget restore ofirManaFamily.sln -NonInteractive
+      - name: Build Release
+        run: msbuild ofirManaFamily.sln /t:Rebuild /p:Configuration=Release /m /v:minimal /nologo

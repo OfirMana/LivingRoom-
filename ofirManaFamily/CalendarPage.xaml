@@ -1,0 +1,51 @@
+﻿<Page x:Class="ofirManaFamily.CalendarPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+      Title="Calendar">
+
+    <DockPanel>
+
+        <!-- ─── top toolbar ─── -->
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Margin="10"
+                    HorizontalAlignment="Center">
+
+            <Button Content="Add Event"
+                    Width="110" Height="34"
+                    Margin="0,0,10,0"
+                    Click="AddEvent_Click"/>
+
+            <Button Content="Manage Events"
+                    Width="110" Height="34"
+                    Margin="0,0,10,0"
+                    Click="ManageEvents_Click"/>
+
+            <!-- info button, always visible -->
+            <Button x:Name="InfoBtn"
+                    Content="?"
+                    FontSize="18" FontWeight="Bold"
+                    Width="32" Height="32"
+                    Background="#5D4C9A" Foreground="White"
+                    Cursor="Hand"
+                    ToolTip="לחץ להסבר על יומן המשפחה"
+                    Click="InfoBtn_Click"/>
+
+            <!-- hidden bulk-sync (unchanged) -->
+            <StackPanel x:Name="SyncPanel"
+                        Orientation="Horizontal"
+                        Visibility="Collapsed">
+                <Button Content="Push Local → Google"
+                        Width="135" Margin="10,0,0,0"
+                        Click="SyncDbToGoogle_Click"/>
+                <Button Content="Pull Google → Local"
+                        Width="135" Margin="10,0,0,0"
+                        Click="SyncGoogleToDb_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- ─── WebView2 with Google Calendar ─── -->
+        <wv2:WebView2 x:Name="CalendarWebView" Margin="10"/>
+    </DockPanel>
+</Page>

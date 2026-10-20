@@ -1,0 +1,19 @@
+# Build products and editor state
+**/bin/
+**/obj/
+**/.vs/
+packages/
+*.user
+*.suo
+*.laccdb
+*.ldb
+# Private configuration and databases; only the sanitized demo is tracked
+**/GCKEY.json
+**/*credentials*.json
+**/*token*.json
+.env
+.env.*
+.local/
+private/
+*.accdb
+!viewModel/DATA/FamilyProjectOfir.accdb

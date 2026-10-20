@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Model.Admin">
+    <Position X="8.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.AdminList" Collapsed="true">
+    <Position X="15.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AdminList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.BaseEntity">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Cities">
+    <Position X="17" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.CitiesList" Collapsed="true">
+    <Position X="18.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CitiesList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Events">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAgAAAAMAAAAAAAAAAAAAIAAgACCABAAAoQQAAI=</HashCode>
+      <FileName>Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.EventsList" Collapsed="true">
+    <Position X="19.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventsList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Families">
+    <Position X="12.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEEEEBABAEIAAABAAEAEAABAAAIAAAACACAIAgBAABA=</HashCode>
+      <FileName>Families.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.FamiliesList" Collapsed="true">
+    <Position X="15.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FamiliesList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.MemberList" Collapsed="true">
+    <Position X="18.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MemberList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Members">
+    <Position X="10.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAgAAAAJAAgAAQAIAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Members.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.PollOptions">
+    <Position X="6.25" Y="6" Width="1.5" />
+    <InheritanceLine Type="Model.BaseEntity" FixedToPoint="true">
+      <Path>
+        <Point X="12.25" Y="2.055" />
+        <Point X="12.25" Y="2.375" />
+        <Point X="8.5" Y="2.375" />
+        <Point X="8.5" Y="5.223" />
+        <Point X="7.188" Y="5.223" />
+        <Point X="7.188" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAIAAAAAAAAEAQAABAAAAAAAAAAAAwAAgAAA=</HashCode>
+      <FileName>PollOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.PollOptionsList" Collapsed="true">
+    <Position X="15.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PollOptionsList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Polls">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAyAAAAMAAAAAAACAQCAAgEAAAAAAAAAAA=</HashCode>
+      <FileName>Polls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.PollsList" Collapsed="true">
+    <Position X="19.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PollsList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Routine">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAwAAAiIAAAIAAAAAAQAAACAAIAAAACAAAAAAA=</HashCode>
+      <FileName>Routine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.RoutineList" Collapsed="true">
+    <Position X="16.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RoutineList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Shopping">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAEBAACAAAAgAAAAIAAAAACAACAAAAAgAAAAAA=</HashCode>
+      <FileName>Shoping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ShoppingList" Collapsed="true">
+    <Position X="16.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShoppingList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Tasks">
+    <Position X="19.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAQgAGAAAABAAAAAAAAAACAAAAEAAAABCAAAA=</HashCode>
+      <FileName>Tasks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.TasksList" Collapsed="true">
+    <Position X="19.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TasksList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.User">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAgEAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.UserList" Collapsed="true">
+    <Position X="16.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.PollVotes">
+    <Position X="11" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABAAAAAAEAAAABAAABAAAAAAAAAAABAAA=</HashCode>
+      <FileName>PollVotes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.PollVotesList" Collapsed="true">
+    <Position X="18.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PollVotesList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ViewModel.BaseDB">
+    <Position X="10.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAEAAAABQAAgAAAABAQACAkUAAAAAAAAAQABUAAA=</HashCode>
+      <FileName>BaseDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ChangeEntity">
+    <Position X="14.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>ChangeEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.CitiesDB">
+    <Position X="13" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAQAAAAAAAAAAACAkAAAAAAAAAAAABCAAA=</HashCode>
+      <FileName>CitiesDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.EventsDB">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="ViewModel.BaseDB" FixedFromPoint="true">
+      <Path>
+        <Point X="11.25" Y="2.75" />
+        <Point X="11.25" Y="2.375" />
+        <Point X="1.375" Y="2.375" />
+        <Point X="1.375" Y="7.839" />
+        <Point X="2.5" Y="7.839" />
+        <Point X="2.5" Y="7.464" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAACAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>EventsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.FamiliesDB">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAACAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>FamiliesDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.MembersDB">
+    <Position X="7.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAACAkEAAAAACAAQAABAAAA=</HashCode>
+      <FileName>MembersDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.PollOptionsDB">
+    <Position X="14.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAAiAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>PollOptionsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.RoutineDB">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAACAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>RoutineDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.PollsDB">
+    <Position X="9.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACCQAAAAAAAAAAACAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>PollsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.TasksDB">
+    <Position X="13.25" Y="6.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAACAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>TasksDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.UserDB">
+    <Position X="6" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAkAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.AdminDB">
+    <Position X="5" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="ViewModel.UserDB" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="6.06" />
+        <Point X="6.75" Y="7.875" />
+        <Point X="5.812" Y="7.875" />
+        <Point X="5.812" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAAAAAAAAACAkEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AdminDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ShoppingDB">
+    <Position X="11.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAACAQAAAACAAAAAACAkEAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>ShoppingDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="ViewModel.CreateSql">
+    <Position X="14.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChangeEntity.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

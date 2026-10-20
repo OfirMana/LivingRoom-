@@ -1,0 +1,42 @@
+﻿<Page x:Class="ofirManaFamily.RegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Register">
+
+    <Grid Margin="20">
+        <TabControl>
+            <!-- TAB 1: Create -->
+            <TabItem Header="צור משפחה">
+                <StackPanel Margin="10" Width="300">
+                    <TextBlock Text="שם משפחה" />
+                    <TextBox x:Name="Create_FamilyName" Margin="0,2,0,8"/>
+
+                    <TextBlock Text="עיר" />
+                    <ComboBox x:Name="Create_City"
+                              DisplayMemberPath="CityName"
+                              SelectedValuePath="Id"
+                              Margin="0,2,0,8"
+                              SelectedIndex="0"/>
+
+                    <TextBlock Text="סיסמה להצטרפות" />
+                    <PasswordBox x:Name="Create_Password" Margin="0,2,0,12"/>
+
+                    <Button Content="צור ובחר" Click="CreateFamily_Click" />
+                </StackPanel>
+            </TabItem>
+
+            <!-- TAB 2: Join -->
+            <TabItem Header="הצטרף למשפחה">
+                <StackPanel Margin="10" Width="300">
+                    <TextBlock Text="מספר משפחה (ID)" />
+                    <TextBox x:Name="Join_FamilyId" Margin="0,2,0,8"/>
+
+                    <TextBlock Text="סיסמת הצטרפות" />
+                    <PasswordBox x:Name="Join_Password" Margin="0,2,0,12"/>
+
+                    <Button Content="הצטרף" Click="JoinFamily_Click" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>
