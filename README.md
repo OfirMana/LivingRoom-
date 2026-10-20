@@ -10,6 +10,8 @@ Created by Ofir Mana as a 2025 software engineering graduation project.
 
 **אין צורך ב־Visual Studio כדי להפעיל את החבילה המוכנה.**
 
+[מדריך הפעלה קצר בעברית](docs/QUICKSTART.he.md)
+
 1. Open [Actions → Windows build](https://github.com/OfirMana/LivingRoom-/actions/workflows/build.yml)
    and choose the latest successful run.
 2. Download the `LivingRoom-Windows-x64` artifact. Extract that download, then extract

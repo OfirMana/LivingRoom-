@@ -21,7 +21,7 @@ foreach ($appFolder in @('Host','ofirManaFamily')) {
         Copy-Item -LiteralPath $file.FullName -Destination $target
     }
 }
-foreach ($relative in @('viewModel\DATA\FamilyProjectOfir.accdb','scripts\Start-LivingRoom.ps1','Start-LivingRoom.cmd','README.md','docs\VERIFICATION.md')) {
+foreach ($relative in @('viewModel\DATA\FamilyProjectOfir.accdb','scripts\Start-LivingRoom.ps1','Start-LivingRoom.cmd','README.md','docs\VERIFICATION.md','docs\QUICKSTART.he.md')) {
     $target = Join-Path $staging $relative
     New-Item -ItemType Directory -Path (Split-Path $target) -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $projectRoot $relative) -Destination $target
