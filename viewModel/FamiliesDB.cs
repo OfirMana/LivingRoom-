@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,42 +94,22 @@ namespace ViewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            Families family = entity as Families;
-            // INSERT the new column last
-            string sqlString = string.Format(
-                "INSERT INTO FamiliesTbl (familyName, cityID, famPass, googleCalendarId) " +
-                "VALUES ('{0}', {1}, '{2}', '{3}')",
-                SqlText(family.FamilyName),
-                family.CityID.Id,
-                SqlText(family.FamPass),
-                SqlText(family.GoogleCalendarId ?? "")   // avoid nulls
-            );
-            return sqlString;
+            var family = (Families)entity;
+            return ParameterizedSql("INSERT INTO [FamiliesTbl] ([familyName], [cityID], [famPass], [googleCalendarId]) VALUES (?, ?, ?, ?)",
+                family.FamilyName, family.CityID.Id, family.FamPass, family.GoogleCalendarId ?? "");
         }
 
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            Families family = entity as Families;
-            // UPDATE the new column as well
-            string sqlString = string.Format(
-                "UPDATE FamiliesTbl SET " +
-                "familyName = '{0}', cityID = {1}, famPass = '{2}', googleCalendarId = '{3}' " +
-                "WHERE ID = {4}",
-                SqlText(family.FamilyName),
-                family.CityID.Id,
-                SqlText(family.FamPass),
-                SqlText(family.GoogleCalendarId ?? ""),
-                family.Id
-            );
-            return sqlString;
+            var family = (Families)entity;
+            return ParameterizedSql("UPDATE [FamiliesTbl] SET [familyName] = ?, [cityID] = ?, [famPass] = ?, [googleCalendarId] = ? WHERE [ID] = ?",
+                family.FamilyName, family.CityID.Id, family.FamPass, family.GoogleCalendarId ?? "", family.Id);
         }
 
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            Families family = entity as Families;
-
-            string sqlString = $"DELETE FROM FamiliesTbl WHERE ID = {family.Id}";
-            return sqlString;
+            var family = (Families)entity;
+            return ParameterizedSql("DELETE FROM [FamiliesTbl] WHERE [ID] = ?", family.Id);
         }
     }
 

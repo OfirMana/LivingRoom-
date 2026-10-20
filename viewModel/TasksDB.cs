@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,43 +90,22 @@ namespace ViewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            Tasks task = entity as Tasks;
-
-            string sqlString = string.Format(
-                "INSERT INTO TasksTbl (taskName, taskDeadline, done, instructions, familyID) " +
-                "VALUES ('{0}', '{1}', {2}, '{3}', {4})",
-                SqlText(task.TaskName),
-                task.TaskDeadline.ToString("yyyy-MM-dd HH:mm:ss"),
-                task.Done ? 1 : 0,
-                SqlText(task.TaskInstructions),
-                task.FamilyID
-            );
-
-            return sqlString;
+            var task = (Tasks)entity;
+            return ParameterizedSql("INSERT INTO [TasksTbl] ([taskName], [taskDeadline], [done], [instructions], [familyID]) VALUES (?, ?, ?, ?, ?)",
+                task.TaskName, task.TaskDeadline, task.Done, task.TaskInstructions, task.FamilyID);
         }
 
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            Tasks task = entity as Tasks;
-
-            string sqlString = string.Format(
-                "UPDATE TasksTbl SET taskName = '{0}', taskDeadline = '{1}', done = {2}, " +
-                "instructions = '{3}', familyID = {4} WHERE ID = {5}",
-                SqlText(task.TaskName),
-                task.TaskDeadline.ToString("yyyy-MM-dd HH:mm:ss"),
-                task.Done ? 1 : 0,
-                SqlText(task.TaskInstructions),
-                task.FamilyID,
-                task.Id
-            );
-
-            return sqlString;
+            var task = (Tasks)entity;
+            return ParameterizedSql("UPDATE [TasksTbl] SET [taskName] = ?, [taskDeadline] = ?, [done] = ?, [instructions] = ?, [familyID] = ? WHERE [ID] = ?",
+                task.TaskName, task.TaskDeadline, task.Done, task.TaskInstructions, task.FamilyID, task.Id);
         }
 
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            Tasks task = entity as Tasks;
-            return $"DELETE FROM TasksTbl WHERE ID = {task.Id}";
+            var task = (Tasks)entity;
+            return ParameterizedSql("DELETE FROM [TasksTbl] WHERE [ID] = ?", task.Id);
         }
     }
 

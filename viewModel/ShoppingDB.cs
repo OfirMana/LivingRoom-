@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,43 +104,22 @@ namespace ViewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            Shopping shopping = entity as Shopping;
-
-            string sqlString = string.Format(
-                "INSERT INTO ShoppingTbl (itemName, quantity, purchased, familyID) " +
-                "VALUES ('{0}', {1}, {2}, {3})",
-                shopping.ItemName.Replace("'", "''"),
-                shopping.Quantity,
-                shopping.Purchased ? 1 : 0,
-                shopping.FamilyID.Id
-            );
-
-            return sqlString;
+            var item = (Shopping)entity;
+            return ParameterizedSql("INSERT INTO [ShoppingTbl] ([itemName], [quantity], [purchased], [familyID]) VALUES (?, ?, ?, ?)",
+                item.ItemName, item.Quantity, item.Purchased, item.FamilyID.Id);
         }
 
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            Shopping shopping = entity as Shopping;
-
-            string sqlString = string.Format(
-                "UPDATE ShoppingTbl SET itemName = '{0}', quantity = {1}, purchased = {2}, familyID = {3} " +
-                "WHERE ID = {4}",
-                shopping.ItemName.Replace("'", "''"),
-                shopping.Quantity,
-                shopping.Purchased ? 1 : 0,
-                shopping.FamilyID.Id,
-                shopping.Id
-            );
-
-            return sqlString;
+            var item = (Shopping)entity;
+            return ParameterizedSql("UPDATE [ShoppingTbl] SET [itemName] = ?, [quantity] = ?, [purchased] = ?, [familyID] = ? WHERE [ID] = ?",
+                item.ItemName, item.Quantity, item.Purchased, item.FamilyID.Id, item.Id);
         }
 
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            Shopping shopping = entity as Shopping;
-
-            string sqlString = $"DELETE FROM ShoppingTbl WHERE ID = {shopping.Id}";
-            return sqlString;
+            var item = (Shopping)entity;
+            return ParameterizedSql("DELETE FROM [ShoppingTbl] WHERE [ID] = ?", item.Id);
         }
     }
 

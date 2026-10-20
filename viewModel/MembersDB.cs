@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -103,39 +103,22 @@ namespace ViewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            /* מכין פקודת INSERT לטבלת MembersTbl – ללא Role */
-            Members m = (Members)entity;
-            int famId = (m.Family != null) ? m.Family.Id : 0;            // בטיחות
-            string name = (m.MemberName ?? "").Replace("'", "''");
-            string iso = m.BirthDate.ToString("yyyy-MM-dd");
-
-            return string.Format(
-                "INSERT INTO MembersTbl " +
-                "(ID, memberName, birthDate, isManager, familyID) " +
-                "VALUES ({0}, '{1}', '{2}', {3}, {4})",
-                m.Id, name, iso, m.IsManager ? 1 : 0, famId);
+            var member = (Members)entity;
+            return ParameterizedSql("INSERT INTO [MembersTbl] ([ID], [memberName], [birthDate], [isManager], [familyID]) VALUES (?, ?, ?, ?, ?)",
+                member.Id, member.MemberName, member.BirthDate, member.IsManager, member.Family.Id);
         }
 
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            /* UPDATE ללא Role */
-            Members m = (Members)entity;
-            string name = m.MemberName.Replace("'", "''");
-            string iso = m.BirthDate.ToString("yyyy-MM-dd");
-
-            return string.Format(
-                "UPDATE MembersTbl SET " +
-                "memberName = '{0}', " +
-                "birthDate  = '{1}', " +
-                "isManager  = {2}, " +
-                "familyID   = {3} " +
-                "WHERE ID   = {4}",
-                name, iso, m.IsManager ? 1 : 0, m.Family.Id, m.Id);
+            var member = (Members)entity;
+            return ParameterizedSql("UPDATE [MembersTbl] SET [memberName] = ?, [birthDate] = ?, [isManager] = ?, [familyID] = ? WHERE [ID] = ?",
+                member.MemberName, member.BirthDate, member.IsManager, member.Family.Id, member.Id);
         }
 
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            return "DELETE FROM MembersTbl WHERE ID = " + ((Members)entity).Id;
+            var member = (Members)entity;
+            return ParameterizedSql("DELETE FROM [MembersTbl] WHERE [ID] = ?", member.Id);
         }
 
         /*──────────────────────── Login ───────────────────────*/
@@ -198,133 +181,3 @@ namespace ViewModel
 //        reader = command.ExecuteReader();
 
 //        Members member;
-//        while (reader.Read())
-//        {
-//            member = new Members();
-//            member.ID = (int)reader["ID"];
-//            member.MemberName = reader["MemberName"].ToString();
-//            member.BirthYear = (int)reader["BirthYear"];
-//            member.BirthMonth = (int)reader["BirthMonth"];
-//            member.BirthDay = (int)reader["BirthDay"];
-//            member.Role = reader["Role"].ToString();
-//            member.Permissions = (int)reader["Permission"];
-//            member.Family = (Families)reader["Family"];
-
-//            //int city = (int)reader["City"];
-//            //student.City = CityDB.SelectByID(city);
-
-//            memberList.Add(member);
-//        }
-//    }
-//    catch (Exception e)
-//    {
-//        System.Diagnostics.Debug.WriteLine(e.Message);
-//    }
-//    finally
-//    {
-//        if (reader != null)
-//            reader.Close();
-
-//        if (connection.State == ConnectionState.Open)
-//            connection.Close();
-//    }
-
-//    return memberList;
-//}
-//public MemberList SelectByName(string MemberName)
-//{
-//    command.CommandText = string.Format("SELECT *,PeopleTbl. ID as ID FROM (PeopleTbl " +
-//    "INNER JOIN StudentTbl ON PeopleTbl. ID = StudentTbl. ID) " +
-//    "WHERE MemberName='{0}''", MemberName);
-//    MemberList memberList = new MemberList();
-
-//    try
-//    {
-//        command.Connection = connection;
-//        connection.Open();
-//        reader = command.ExecuteReader();
-
-//        Members member;
-//        while (reader.Read())
-//        {
-//            member = new Members();
-//            member.ID = (int)reader["ID"];
-//            member.MemberName = reader["MemberName"].ToString();
-//            member.BirthYear = (int)reader["BirthYear"];
-//            member.BirthMonth = (int)reader["BirthMonth"];
-//            member.BirthDay = (int)reader["BirthDay"];
-//            member.Role = reader["Role"].ToString();
-//            member.Permissions = (int)reader["Permission"];
-//            member.Family = (Families)reader["Family"];
-
-//            //int city = (int)reader["City"];
-//            //student.City = CityDB.SelectByID(city);
-
-//            memberList.Add(member);
-//        }
-//    }
-//    catch (Exception e)
-//    {
-//        System.Diagnostics.Debug.WriteLine(e.Message);
-//    }
-//    finally
-//    {
-//        if (reader != null)
-//            reader.Close();
-
-//        if (connection.State == ConnectionState.Open)
-//            connection.Close();
-//    }
-
-//    return memberList;
-//}
-//public Members SelectById(int id)
-//{
-//    command.CommandText = "SELECT *,PersonTbl.ID as ID FROM (PersonTbl INNER JOIN" +
-//    "StudentTbl ON PersonTbl.ID StudentTbl.ID)" + $"WHEREW PersonTbl.ID={id}";
-//    MemberList memberList = new MemberList();
-
-//    try
-//    {
-//        command.Connection = connection;
-//        connection.Open();
-//        reader = command.ExecuteReader();
-
-//        Members member;
-//        while (reader.Read())
-//        {
-//            member = new Members();
-//            member.ID = (int)reader["ID"];
-//            member.MemberName = reader["MemberName"].ToString();
-//            member.BirthYear = (int)reader["BirthYear"];
-//            member.BirthMonth = (int)reader["BirthMonth"];
-//            member.BirthDay = (int)reader["BirthDay"];
-//            member.Role = reader["Role"].ToString();
-//            member.Permissions = (int)reader["Permission"];
-//            member.Family = (Families)reader["Family"];
-
-//            //int city = (int)reader["City"];
-//            //student.City = CityDB.SelectByID(city);
-
-//            memberList.Add(member);
-//        }
-//    }
-//    catch (Exception e)
-//    {
-//        System.Diagnostics.Debug.WriteLine(e.Message);
-//    }
-//    finally
-//    {
-//        if (reader != null)
-//            reader.Close();
-
-//        if (connection.State == ConnectionState.Open)
-//            connection.Close();
-//    }
-//    if (memberList.Count == 1)
-//        return memberList[0];
-//    else
-//        return null;
-//}
-
-

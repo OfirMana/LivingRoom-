@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,29 +96,20 @@ namespace viewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            PollVotes vote = entity as PollVotes;
-            string sqlString = string.Format(
-                "INSERT INTO PollVotesTbl (pollID, optionID, memberID) VALUES ({0}, {1}, {2})",
-                vote.PollID,
-                vote.OptionID,
-                vote.MemberID
-            );
-            return sqlString;
+            var vote = (PollVotes)entity;
+            return ParameterizedSql("INSERT INTO [PollVotesTbl] ([pollID], [optionID], [memberID]) VALUES (?, ?, ?)",
+                vote.PollID, vote.OptionID, vote.MemberID);
         }
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            PollVotes vote = entity as PollVotes;
-            string sqlString = string.Format(
-                "UPDATE PollVotesTbl SET pollID = {0}, optionID = {1}, memberID = {2} WHERE ID = {3}",
-                vote.PollID, vote.OptionID, vote.MemberID, vote.Id
-            );
-            return sqlString;
+            var vote = (PollVotes)entity;
+            return ParameterizedSql("UPDATE [PollVotesTbl] SET [pollID] = ?, [optionID] = ?, [memberID] = ? WHERE [ID] = ?",
+                vote.PollID, vote.OptionID, vote.MemberID, vote.Id);
         }
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            PollVotes vote = entity as PollVotes;
-            string sqlString = $"DELETE FROM PollVotesTbl WHERE ID = {vote.Id}";
-            return sqlString;
+            var vote = (PollVotes)entity;
+            return ParameterizedSql("DELETE FROM [PollVotesTbl] WHERE [ID] = ?", vote.Id);
         }
     }
 

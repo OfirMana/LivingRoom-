@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,43 +105,22 @@ namespace ViewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            Polls poll = entity as Polls;
-
-            string sqlString = string.Format(
-                "INSERT INTO PollsTbl (question, description, results, familyID) " +
-                "VALUES ('{0}', '{1}', {2}, {3})",
-                SqlText(poll.Question),
-                SqlText(poll.Description),
-                poll.Results,
-                poll.FamilyID.Id
-            );
-
-            return sqlString;
+            var poll = (Polls)entity;
+            return ParameterizedSql("INSERT INTO [PollsTbl] ([question], [description], [results], [familyID]) VALUES (?, ?, ?, ?)",
+                poll.Question, poll.Description, poll.Results, poll.FamilyID.Id);
         }
 
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            Polls poll = entity as Polls;
-
-            string sqlString = string.Format(
-                "UPDATE PollsTbl SET question = '{0}', description = '{1}', results = {2}, familyID = {3} " +
-                "WHERE ID = {4}",
-                SqlText(poll.Question),
-                SqlText(poll.Description),
-                poll.Results,
-                poll.FamilyID.Id,
-                poll.Id
-            );
-
-            return sqlString;
+            var poll = (Polls)entity;
+            return ParameterizedSql("UPDATE [PollsTbl] SET [question] = ?, [description] = ?, [results] = ?, [familyID] = ? WHERE [ID] = ?",
+                poll.Question, poll.Description, poll.Results, poll.FamilyID.Id, poll.Id);
         }
 
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            Polls poll = entity as Polls;
-
-            string sqlString = $"DELETE FROM PollsTbl WHERE ID = {poll.Id}";
-            return sqlString;
+            var poll = (Polls)entity;
+            return ParameterizedSql("DELETE FROM [PollsTbl] WHERE [ID] = ?", poll.Id);
         }
     }
 

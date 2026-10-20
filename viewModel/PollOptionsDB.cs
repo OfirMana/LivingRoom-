@@ -1,4 +1,4 @@
-﻿using Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,18 +90,9 @@ namespace ViewModel
 
         protected override string CreateInsertSQL(BaseEntity entity)
         {
-            PollOptions pollOption = entity as PollOptions;
-            string sqlString = string.Format(
-                "INSERT INTO PollOptionsTbl (pollID, optionNumber, optionText, votes) " +
-                "VALUES ({0}, {1}, '{2}', {3})",
-                pollOption.PollID,
-                pollOption.OptionNumber,
-                pollOption.OptionText.Replace("'", "''"), // escape single quotes
-                pollOption.Votes
-            );
-            // DEBUG:
-            System.Diagnostics.Debug.WriteLine("SQL: " + sqlString);
-            return sqlString;
+            var option = (PollOptions)entity;
+            return ParameterizedSql("INSERT INTO [PollOptionsTbl] ([pollID], [optionNumber], [optionText], [votes]) VALUES (?, ?, ?, ?)",
+                option.PollID, option.OptionNumber, option.OptionText, option.Votes);
         }
         public void IncrementVote(int optionId)
         {
@@ -115,27 +106,15 @@ namespace ViewModel
 
         protected override string CreateUpdateSQL(BaseEntity entity)
         {
-            PollOptions pollOption = entity as PollOptions;
-
-            string sqlString = string.Format(
-                "UPDATE PollOptionsTbl SET pollID = {0}, optionNumber = {1}, optionText = '{2}', votes = {3} " +
-                "WHERE ID = {4}",
-                pollOption.PollID,
-                pollOption.OptionNumber,
-                SqlText(pollOption.OptionText),
-                pollOption.Votes,
-                pollOption.Id
-            );
-
-            return sqlString;
+            var option = (PollOptions)entity;
+            return ParameterizedSql("UPDATE [PollOptionsTbl] SET [pollID] = ?, [optionNumber] = ?, [optionText] = ?, [votes] = ? WHERE [ID] = ?",
+                option.PollID, option.OptionNumber, option.OptionText, option.Votes, option.Id);
         }
 
         protected override string CreateDeleteSQL(BaseEntity entity)
         {
-            PollOptions pollOption = entity as PollOptions;
-
-            string sqlString = $"DELETE FROM PollOptionsTbl WHERE ID = {pollOption.Id}";
-            return sqlString;
+            var option = (PollOptions)entity;
+            return ParameterizedSql("DELETE FROM [PollOptionsTbl] WHERE [ID] = ?", option.Id);
         }
     }
 

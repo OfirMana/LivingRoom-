@@ -6,6 +6,22 @@ A Hebrew Windows desktop application for organizing family life: household tasks
 shopping lists, family members, polls, and an optional Google Calendar integration.
 Created by Ofir Mana as a 2025 software engineering graduation project.
 
+## Engineering highlights
+
+- **Five-project architecture:** separate models, Access data layer, WCF service,
+  desktop host, and Hebrew WPF client.
+- **Atomic writes:** failed operations roll back related changes, including
+  linked login/member creation.
+- **Isolated change queues:** each repository instance owns its pending writes.
+- **Parameterized core writes:** typed text, dates, flags, and IDs in the family,
+  member, task, shopping, and poll flows.
+- **Verified delivery:** 31 database-backed integration checks, a Windows CI build,
+  and a packaged app with a checksum.
+
+[Engineering decisions and tradeoffs](docs/ENGINEERING.md) ·
+[Verification details](docs/VERIFICATION.md) ·
+[מדריך הפעלה בעברית](docs/QUICKSTART.he.md)
+
 ## Try the Windows app
 
 **אין צורך ב־Visual Studio כדי להפעיל את החבילה המוכנה.**
@@ -32,9 +48,6 @@ download its build artifacts.
 | Family polls | Create options and cast votes |
 | Calendar | Connect a separately configured Google Calendar account |
 
-The source retains the original Hebrew WPF interface. Screenshots are intentionally
-not included yet: desktop interaction has not been visually verified in this recovery.
-
 ## Architecture
 
 | Project | Responsibility |
@@ -54,8 +67,7 @@ flowchart LR
     Service -. Optional credentials .-> Google[Google Calendar]
 ```
 
-The solution targets .NET Framework 4.7.2 and Windows x64. It runs locally;
-WSL and CLion are unrelated to this application.
+The solution targets .NET Framework 4.7.2 and Windows x64.
 
 ## Requirements
 
@@ -123,10 +135,10 @@ Calendar API access, then supply its JSON file with `-GoogleCredentialsPath`, or
 set `GOOGLE_APPLICATION_CREDENTIALS` before launching the host. Never commit that
 file. The original key is deliberately excluded from this repository.
 
-This recovery version **does not automatically grant public access to family
-calendars**. The original embedded calendar view may require the calendar owner
+The integration **does not automatically grant public access to family
+calendars**. The embedded calendar view may require the calendar owner
 to configure appropriate viewer access and a signed-in browser session. Live
-Google operations and that embedded view have not been tested in this recovery.
+Google operations and that embedded view have not been verified in this version.
 
 ## Verification
 
@@ -138,15 +150,16 @@ After building, with ACE 16.0 x64 installed:
 
 The test creates a disposable database copy. It covers linked family/user creation,
 valid and invalid login, task completion, shopping purchases, polls/options/votes,
-deletion, missing Google configuration, and WCF serialization. It never modifies
+deletion, missing Google configuration, WCF serialization, queue isolation, and
+rollback of a partially failed operation. It never modifies
 the database template or the original private database.
 
 See [verification details](docs/VERIFICATION.md) and [source provenance](docs/PROVENANCE.md).
 
 ## Scope and limitations
 
-This repository preserves a student desktop project, with targeted portability and
-recovery fixes. It is not a production or internet-facing service. The legacy
+LivingRoom is an educational desktop application. It is not a production or
+internet-facing service. The legacy
 authentication stores passwords in the Access database and the service does not
 enforce a complete authorization boundary. Use disposable local demo credentials;
 authentication, authorization, and the remaining legacy SQL builders need a

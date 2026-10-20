@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Linq;
 using System.IO;
 using Model;
 
@@ -40,9 +41,9 @@ namespace ViewModel
         public abstract BaseEntity newEntity();
         public abstract BaseEntity CreateModel(BaseEntity entity);
 
-        public static List<ChangeEntity> insert = new List<ChangeEntity>();
-        public static List<ChangeEntity> update = new List<ChangeEntity>();
-        public static List<ChangeEntity> delete = new List<ChangeEntity>();
+        protected readonly List<ChangeEntity> insert = new List<ChangeEntity>();
+        protected readonly List<ChangeEntity> update = new List<ChangeEntity>();
+        protected readonly List<ChangeEntity> delete = new List<ChangeEntity>();
 
         protected abstract string CreateInsertSQL(BaseEntity entity);
         protected abstract string CreateUpdateSQL(BaseEntity entity);
@@ -81,48 +82,83 @@ namespace ViewModel
 
             return list;
         }
+        /// <summary>Commits this repository's queued changes as one atomic operation.</summary>
         public int SaveChanges()
         {
-            OleDbCommand command = new OleDbCommand();
             int records = 0;
+            var identities = insert.Select(change => change.Entity).Distinct()
+                .ToDictionary(entity => entity, entity => entity.Id);
+            OleDbTransaction transaction = null;
             try
             {
-                command.Connection = this.connection;
                 connection.Open();
-                //records = command.ExecuteNonQuery();
-
-                //עוברים על כל הרשימה שצריך להוסיף
-                foreach (var item in insert)
+                transaction = connection.BeginTransaction();
+                command.Transaction = transaction;
+                foreach (var change in insert)
                 {
-                    command.CommandText = item.CreateSQL(item.Entity);
+                    command.Parameters.Clear();
+                    command.CommandText = change.CreateSQL(change.Entity);
                     records += command.ExecuteNonQuery();
-                    command.CommandText = "SELECT @@IDentity"; //Get last ID
-                    item.Entity.Id = (int)command.ExecuteScalar();
+                    command.Parameters.Clear();
+                    command.CommandText = "SELECT @@IDENTITY";
+                    change.Entity.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
-                foreach (var item in update)
+                foreach (var change in update.Concat(delete))
                 {
-                    command.CommandText = item.CreateSQL(item.Entity);
-                    records += command.ExecuteNonQuery();
-                }
-                foreach (var item in delete)
-                {
-                    command.CommandText = item.CreateSQL(item.Entity);
+                    command.Parameters.Clear();
+                    command.CommandText = change.CreateSQL(change.Entity);
                     records += command.ExecuteNonQuery();
                 }
+                transaction.Commit();
+                return records;
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message + "\nSQL: " + command.CommandText);
+                if (transaction != null)
+                {
+                    try { transaction.Rollback(); }
+                    catch (Exception rollbackError) when (rollbackError is OleDbException || rollbackError is InvalidOperationException)
+                    {
+                        Trace.TraceError("Database rollback could not complete ({0}).", rollbackError.GetType().Name);
+                    }
+                }
+                foreach (var original in identities) original.Key.Id = original.Value;
+                // Never write SQL values, credentials, or database contents to logs.
+                Trace.TraceError("Database save failed ({0}).", error.GetType().Name);
+                return 0;
             }
             finally
             {
+                command.Transaction = null;
+                command.Parameters.Clear();
+                transaction?.Dispose();
                 insert.Clear();
                 update.Clear();
                 delete.Clear();
-                if (connection.State == ConnectionState.Open)
-                    connection.Close();
+                if (connection.State != ConnectionState.Closed) connection.Close();
             }
-            return records;
+        }
+
+        // OLE DB binds parameters by position, regardless of their names.
+        protected string ParameterizedSql(string sql, params object[] values)
+        {
+            command.Parameters.Clear();
+            for (int index = 0; index < values.Length; index++)
+            {
+                object value = values[index] ?? string.Empty;
+                var parameter = new OleDbParameter { ParameterName = "@p" + index };
+                if (value is DateTime) parameter.OleDbType = OleDbType.DBTimeStamp;
+                else if (value is bool) parameter.OleDbType = OleDbType.Boolean;
+                else if (value is int) parameter.OleDbType = OleDbType.Integer;
+                else
+                {
+                    parameter.OleDbType = OleDbType.VarWChar;
+                    parameter.Size = Math.Max(Convert.ToString(value).Length, 1);
+                }
+                parameter.Value = value;
+                command.Parameters.Add(parameter);
+            }
+            return sql;
         }
 
         public virtual void Insert(BaseEntity entity)
