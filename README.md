@@ -1,8 +1,37 @@
 # LivingRoom
 
+[![Windows build](https://github.com/OfirMana/LivingRoom-/actions/workflows/build.yml/badge.svg)](https://github.com/OfirMana/LivingRoom-/actions/workflows/build.yml)
+
 A Hebrew Windows desktop application for organizing family life: household tasks,
 shopping lists, family members, polls, and an optional Google Calendar integration.
 Created by Ofir Mana as a 2025 software engineering graduation project.
+
+## Try the Windows app
+
+**אין צורך ב־Visual Studio כדי להפעיל את החבילה המוכנה.**
+
+1. Open [Actions → Windows build](https://github.com/OfirMana/LivingRoom-/actions/workflows/build.yml)
+   and choose the latest successful run.
+2. Download the `LivingRoom-Windows-x64` artifact. Extract that download, then extract
+   the application ZIP inside it completely into a writable folder.
+3. Open `Start-LivingRoom.cmd`. Keep both the host and client windows open.
+4. Register a new family and member. Choose the manager checkbox for the first member.
+
+The package starts with an empty family database and an existing city lookup.
+See the prerequisites below if a runtime component is missing. A checksum is
+included next to the ZIP. GitHub requires access to this private repository to
+download its build artifacts.
+
+| Feature | What you can do |
+| --- | --- |
+| Family members | Register, join a family, and manage member details |
+| Household tasks | Add tasks with deadlines and mark them complete |
+| Shopping | Maintain a shared list and mark items as purchased |
+| Family polls | Create options and cast votes |
+| Calendar | Connect a separately configured Google Calendar account |
+
+The source retains the original Hebrew WPF interface. Screenshots are intentionally
+not included yet: desktop interaction has not been visually verified in this recovery.
 
 ## Architecture
 
@@ -13,6 +42,15 @@ Created by Ofir Mana as a 2025 software engineering graduation project.
 | `WcfServiceLibrary1` | WCF service and optional Google Calendar integration |
 | `Host` | Local WPF service host |
 | `ofirManaFamily` | Hebrew WPF client with WebView2 calendar display |
+
+```mermaid
+flowchart LR
+    Client[Hebrew WPF client] -->|Local WCF named pipe| Host[WPF host]
+    Host --> Service[WCF service]
+    Service --> DAL[Access data layer]
+    DAL --> DB[(Access database)]
+    Service -. Optional credentials .-> Google[Google Calendar]
+```
 
 The solution targets .NET Framework 4.7.2 and Windows x64. It runs locally;
 WSL and CLion are unrelated to this application.

@@ -15,3 +15,15 @@ jobs:
         run: nuget restore ofirManaFamily.sln -NonInteractive
       - name: Build Release
         run: msbuild ofirManaFamily.sln /t:Rebuild /p:Configuration=Release /m /v:minimal /nologo
+      - name: Package Windows app
+        shell: powershell
+        run: .\scripts\Package-LivingRoom.ps1 -OutputPath "$env:RUNNER_TEMP\LivingRoom-Windows-x64.zip"
+      - name: Upload runnable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: LivingRoom-Windows-x64
+          path: |
+            ${{ runner.temp }}/LivingRoom-Windows-x64.zip
+            ${{ runner.temp }}/LivingRoom-Windows-x64.zip.sha256
+          if-no-files-found: error
+          retention-days: 30
